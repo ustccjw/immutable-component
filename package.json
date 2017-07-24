@@ -1,0 +1,56 @@
+{
+  "name": "immutable-component",
+  "version": "1.0.0",
+  "description": "immutable-component to make state immutable",
+  "keywords": [
+    "component",
+    "immutable"
+  ],
+  "homepage": "https://github.com/ustccjw/immutable-component#readme",
+  "bugs": {
+    "url": "https://github.com/ustccjw/immutable-component/issues"
+  },
+  "license": "MIT",
+  "author": "ustccjw",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ustccjw/immutable-component.git"
+  },
+  "scripts": {
+    "build": "tnpm run clean && babel src -d lib",
+    "clean": "rimraf lib",
+    "lint": "eslint .",
+    "prepublish": "tnpm test && tnpm run build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "seamless-immutable": "7"
+  },
+  "devDependencies": {
+    "babel-cli": "6",
+    "babel-preset-ustccjw": "1",
+    "enzyme": "2",
+    "eslint": "3",
+    "eslint-config-ustccjw": "1",
+    "jest": "20",
+    "pre-commit": "1",
+    "react": "15",
+    "react-dom": "15",
+    "rimraf": "2"
+  },
+  "peerDependencies": {
+    "react": "15"
+  },
+  "engines": {
+    "node": "7"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ]
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
