@@ -14,7 +14,7 @@ class ImmutableComponent extends PureComponent {
     let nextState = this.immutableState
     Object.keys(obj).forEach(key => {
       const value = obj[key]
-      nextState = Immutable.static.setIn(this.immutableState, key.split('.'), value)
+      nextState = Immutable.static.setIn(nextState, key.split('.'), value)
     })
     super.setState(nextState, cb)
   }
