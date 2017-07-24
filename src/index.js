@@ -10,12 +10,13 @@ class ImmutableComponent extends PureComponent {
     return this.immutableState
   }
 
-  setState(obj) {
+  setState(obj, cb) {
+    let nextState = this.immutableState
     Object.keys(obj).forEach(key => {
       const value = obj[key]
-      this.immutableState = Immutable.static.setIn(this.immutableState, key.split('.'), value)
+      nextState = Immutable.static.setIn(this.immutableState, key.split('.'), value)
     })
-    super.setState({})
+    super.setState(nextState, cb)
   }
 }
 
