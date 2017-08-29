@@ -4,6 +4,7 @@ import Immutable from 'seamless-immutable'
 class ImmutableComponent extends PureComponent {
   set state(obj) {
     this.immutableState = Immutable.static(obj)
+    this.batchState = this.immutableState
   }
 
   get state() {
@@ -11,12 +12,12 @@ class ImmutableComponent extends PureComponent {
   }
 
   setState(obj, cb) {
-    let nextState = this.immutableState
+    this.batchState = this.batchState || Immutable.static({})
     Object.keys(obj).forEach(key => {
       const value = obj[key]
-      nextState = Immutable.static.setIn(nextState, key.split('.'), value)
+      this.batchState = Immutable.static.setIn(this.batchState, key.split('.'), value)
     })
-    super.setState(nextState, cb)
+    super.setState(this.batchState, cb)
   }
 }
 
