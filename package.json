@@ -23,7 +23,7 @@
     "compile:es": "cp -rf src es && BABEL_ENV=es babel es -d es",
     "lint": "eslint .",
     "prepublishOnly": "npm run test && npm run build",
-    "test": "npm run test"
+    "test": "jest"
   },
   "dependencies": {
     "immer": "1"
