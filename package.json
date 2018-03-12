@@ -1,6 +1,6 @@
 {
   "name": "immutable-component",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "immutable-component to make state immutable",
   "keywords": [
     "component",
@@ -22,7 +22,8 @@
     "compile": "cp -rf src lib && BABEL_ENV=common babel lib -d lib",
     "compile:es": "cp -rf src es && BABEL_ENV=es babel es -d es",
     "lint": "eslint .",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run test && npm run build",
+    "test": "npm run test"
   },
   "dependencies": {
     "immer": "1"
