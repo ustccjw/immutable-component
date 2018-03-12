@@ -36,7 +36,6 @@ class MyComponent extends ImmutableComponent {
 }
 
 describe('immutable state ', () => {
-
   test('init state: value', () => {
     const component = TestRenderer.create(<MyComponent />).getInstance()
     const state = component.state

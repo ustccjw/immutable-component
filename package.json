@@ -22,8 +22,7 @@
     "compile": "cp -rf src lib && BABEL_ENV=common babel lib -d lib",
     "compile:es": "cp -rf src es && BABEL_ENV=es babel es -d es",
     "lint": "eslint .",
-    "prepublishOnly": "npm run test && npm run build",
-    "test": "NODE_ENV=test jest"
+    "prepublishOnly": "npm run test && npm run build"
   },
   "dependencies": {
     "immer": "1"
@@ -41,7 +40,6 @@
     "husky": "0.14",
     "jest": "22",
     "lint-staged": "7",
-    "pre-commit": "1",
     "react": "15",
     "react-dom": "15",
     "react-test-renderer": "15",
