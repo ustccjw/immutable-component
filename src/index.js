@@ -1,23 +1,22 @@
 import { PureComponent } from 'react'
-import Immutable from 'seamless-immutable'
+import produce from 'immer'
 
 class ImmutableComponent extends PureComponent {
-  set state(obj) {
-    this.immutableState = Immutable.static(obj)
-    this.batchState = this.immutableState
-  }
-
-  get state() {
-    return this.immutableState
-  }
-
-  setState(obj, cb) {
-    this.batchState = this.batchState || Immutable.static({})
-    Object.keys(obj).forEach(key => {
-      const value = obj[key]
-      this.batchState = Immutable.static.setIn(this.batchState, key.split('.'), value)
+  setState(updater, cb) {
+    if (typeof updater === 'function') {
+      return super.setState(updater, cb)
+    }
+    const stateChange = updater
+    const prevState = this.state || {}
+    const nextState = produce(prevState, state => {
+      Object.keys(stateChange).forEach(key => {
+        const keyArr = key.split('.')
+        const lastKey = keyArr.pop()
+        const lastState = keyArr.reduce((state2, key2) => state2[key2], state)
+        lastState[lastKey] = stateChange[key]
+      })
     })
-    super.setState(this.batchState, cb)
+    return super.setState(nextState, cb)
   }
 }
 

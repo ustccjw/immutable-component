@@ -1,56 +1,69 @@
 {
   "name": "immutable-component",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "immutable-component to make state immutable",
   "keywords": [
     "component",
     "immutable"
   ],
-  "homepage": "https://github.com/ustccjw/immutable-component#readme",
-  "bugs": {
-    "url": "https://github.com/ustccjw/immutable-component/issues"
-  },
   "license": "MIT",
   "author": "ustccjw",
   "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ustccjw/immutable-component.git"
+    "url": "https://github.com/ustccjw/immutable-component"
   },
   "scripts": {
-    "build": "tnpm run clean && babel src -d lib",
-    "clean": "rimraf lib",
+    "build": "npm run clean && npm run compile && npm run compile:es",
+    "clean": "rimraf lib es",
+    "precommit": "lint-staged",
+    "commitmsg": "commitlint -e",
+    "compile": "cp -rf src lib && BABEL_ENV=common babel lib -d lib",
+    "compile:es": "cp -rf src es && BABEL_ENV=es babel es -d es",
     "lint": "eslint .",
-    "prepublish": "tnpm test && tnpm run build",
-    "test": "jest"
+    "prepublishOnly": "npm run test && npm run build",
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
-    "seamless-immutable": "7"
+    "immer": "1"
   },
   "devDependencies": {
-    "babel-cli": "6",
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@commitlint/cli": "6",
+    "@commitlint/config-angular": "6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "22",
     "babel-preset-ustccjw": "1",
-    "enzyme": "2",
-    "eslint": "3",
+    "eslint": "4",
     "eslint-config-ustccjw": "1",
-    "jest": "20",
+    "husky": "0.14",
+    "jest": "22",
+    "lint-staged": "7",
     "pre-commit": "1",
     "react": "15",
     "react-dom": "15",
+    "react-test-renderer": "15",
     "rimraf": "2"
   },
   "peerDependencies": {
     "react": "15"
   },
   "engines": {
-    "node": "7"
+    "node": ">= 9.0.0"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-angular"
+    ]
   },
   "jest": {
     "testMatch": [
       "**/test/**/*.js"
     ]
   },
-  "pre-commit": [
-    "lint"
-  ]
+  "lint-staged": {
+    "*.js": "eslint"
+  }
 }

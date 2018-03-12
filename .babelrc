@@ -1,3 +1,15 @@
 {
-  "presets": ["babel-preset-ustccjw"]
+  "env": {
+    "es": {
+      "presets": [
+        ["babel-preset-ustccjw", { "modules": false }]
+      ]
+    },
+    "common": {
+      "presets": ["babel-preset-ustccjw"]
+    },
+    "test": {
+      "presets": ["babel-preset-ustccjw"]
+    }
+  }
 }
