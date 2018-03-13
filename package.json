@@ -1,6 +1,6 @@
 {
   "name": "immutable-component",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "immutable-component to make state immutable",
   "keywords": [
     "component",
@@ -49,7 +49,7 @@
     "react": "15"
   },
   "engines": {
-    "node": ">= 9.0.0"
+    "node": ">= 8.10.0"
   },
   "commitlint": {
     "extends": [
