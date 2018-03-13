@@ -49,6 +49,19 @@ describe('immutable state ', () => {
     expect(state.a.b).toBe(1)
   })
 
+  test('change state: error', () => {
+    const component = TestRenderer.create(<MyComponent />).getInstance()
+    component.setState({ 'a.b': 1 })
+    const state = component.state
+    let err = null
+    try {
+      state.a.c = 1
+    } catch (error) {
+      err = error
+    }
+    expect(err).not.toBe(null)
+  })
+
   test('set state: diff change', () => {
     const component = TestRenderer.create(<MyComponent />).getInstance()
     const state = component.state
