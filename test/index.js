@@ -85,6 +85,13 @@ describe('setState function', () => {
     expect(state.a.b).toBe(1)
   })
 
+  test('return value', () => {
+    const component = TestRenderer.create(<MyComponent data="1" />).getInstance()
+    component.setState(() => ({ a: { b: 1 } }))
+    const state = component.state
+    expect(state.a.b).toBe(1)
+  })
+
   test('set state: diff change', () => {
     const component = TestRenderer.create(<MyComponent />).getInstance()
     const state = component.state
