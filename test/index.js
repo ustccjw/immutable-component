@@ -73,3 +73,29 @@ describe('immutable state ', () => {
     expect(newState.c.d).toBe(state.c.d)
   })
 })
+
+describe('setState function', () => {
+  test('standard', () => {
+    const component = TestRenderer.create(<MyComponent data="1" />).getInstance()
+    component.setState((prevState => {
+      // eslint-disable-next-line
+      prevState.a.b = 1
+    }))
+    const state = component.state
+    expect(state.a.b).toBe(1)
+  })
+
+  test('set state: diff change', () => {
+    const component = TestRenderer.create(<MyComponent />).getInstance()
+    const state = component.state
+    component.setState((prevState => {
+      // eslint-disable-next-line
+      prevState.a.b = 1
+    }))
+    const newState = component.state
+    expect(newState.a).not.toBe(state.a)
+    expect(newState.a.b).not.toBe(state.a.b)
+    expect(newState.c).toBe(state.c)
+    expect(newState.c.d).toBe(state.c.d)
+  })
+})
