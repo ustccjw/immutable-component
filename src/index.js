@@ -3,9 +3,15 @@ import produce from 'immer'
 
 class ImmutableComponent extends PureComponent {
   setState(updater, cb) {
-    if (updater === null || typeof updater === 'function') return super.setState(updater, cb)
+    if (updater === null) return super.setState(updater, cb)
 
     this.batchState = this.batchState || this.state || {}
+
+    if (typeof updater === 'function') {
+      this.batchState = produce(this.batchState, updater)
+      return super.setState(this.batchState, cb)
+    }
+
     const newState = updater
     this.batchState = produce(this.batchState, state => {
       Object.keys(newState).forEach(key => {
